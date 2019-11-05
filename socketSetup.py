@@ -34,10 +34,11 @@ while True:
 
     #print that we are connected w/ address.
     print('Connected by', addr)
-    while True:
+    while 1:
         #recieve 10 bytes
         data = conn.recv(10)
-
+        if not data:
+            break
         #convert data to a string.
         data = str(data.decode("utf-8"))
 
@@ -53,6 +54,8 @@ while True:
         #something here to print/return
 
         packet = parse(fullData)
-        pprint.pprint(vars(obj))
+        #pprint.pprint(vars(obj))
+        conn.sendall("testing");
         #if (packet['value'] == "BREAK"):
         #    break
+    conn.close()
