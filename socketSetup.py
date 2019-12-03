@@ -37,7 +37,9 @@ while True:
     while True:
         #recieve 10 bytes
         data = conn.recv(10)
-
+        #break if not what we are looking for
+        if not data:
+            break
         #convert data to a string.
         data = str(data.decode("utf-8"))
 
@@ -53,6 +55,10 @@ while True:
         #something here to print/return
 
         packet = parse(fullData)
+        #pprint here allows us to print out all of the attributes of the object we created.
         pprint.pprint(vars(obj))
-        #if (packet['value'] == "BREAK"):
-        #    break
+
+        #python 2 - "testing" is fine.
+        #python 3 - need to convert to byte. no errors thrown, but doesnt send to java client
+        conn.send(b'testing')
+    conn.close()
